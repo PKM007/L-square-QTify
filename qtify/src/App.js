@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Navbar from './components/Navbar/Navbar'
+import Navbar from './components/Navbar/Navbar';
+import Hero from './components/Hero/Hero';
 import Section from './components/Section/Section';
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
   return (
     <div>
       <Navbar />
+      <Hero/>
       <Section title="Top Albums" data={topAlbums} type="album" />
       <Section title="New Albums" data={newAlbums} type="album" />
       <Section title="Songs" data={songs} type="song" />
