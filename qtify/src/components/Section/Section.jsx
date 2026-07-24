@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { CircularProgress } from '@mui/material';
 import Card from '../Card/Card';
 import Carousel from '../Carousel/Carousel';
