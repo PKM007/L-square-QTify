@@ -1,0 +1,34 @@
+.wrapper {
+  position: relative;
+}
+
+.leftNavigation,
+.rightNavigation {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.leftNavigation {
+  left: 0;
+}
+
+.rightNavigation {
+  right: 0;
+}
+
+.leftNavigation button,
+.rightNavigation button {
+  background-color: var(--color-primary, #34c94b);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  color: #ffffff;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

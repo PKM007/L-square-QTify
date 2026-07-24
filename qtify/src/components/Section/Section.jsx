@@ -1,48 +1,45 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { CircularProgress } from '@mui/material';
 import Card from '../Card/Card';
+import Carousel from '../Carousel/Carousel';
 import styles from './Section.module.css';
 
-function Section({ title, dataSource }) {
-  const [data, setData] = useState([]);
-  const [isCollapsed, setIsCollapsed] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(dataSource);
-        setData(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, [dataSource]); // 'dataSource' is the only external dependency required now
+function Section({ title, data, type, filterSource }) {
+  const [carouselToggle, setCarouselToggle] = useState(true);
 
   const handleToggle = () => {
-    setIsCollapsed((prevState) => !prevState);
+    setCarouselToggle((prevState) => !prevState);
   };
 
   return (
     <div className={styles.section}>
       <div className={styles.header}>
         <h3>{title}</h3>
-        <h4 className={styles.toggleText} onClick={handleToggle}>
-          {!isCollapsed ? 'Collapse' : 'Show All'}
-        </h4>
+        {type !== 'song' && (
+          <h4 className={styles.toggleText} onClick={handleToggle}>
+            {!carouselToggle ? 'Collapse' : 'Show All'}
+          </h4>
+        )}
       </div>
-      {!isCollapsed ? (
-        <div className={styles.gridContainer}>
-          {data.map((item) => (
-            <Card key={item.id} data={item} type="album" />
-          ))}
-        </div>
+
+      {!data.length ? (
+        <CircularProgress />
       ) : (
-        <div className={styles.gridContainer}>
-          {data.slice(0, 7).map((item) => (
-            <Card key={item.id} data={item} type="album" />
-          ))}
+        <div className={styles.cardsWrapper}>
+          {!carouselToggle ? (
+            <div className={styles.gridContainer}>
+              {data.map((item) => (
+                <Card key={item.id} data={item} type={type} />
+              ))}
+            </div>
+          ) : (
+            <Carousel
+              data={data}
+              renderComponent={(dataItem) => (
+                <Card data={dataItem} type={type} />
+              )}
+            />
+          )}
         </div>
       )}
     </div>
