@@ -7,18 +7,18 @@ function Section({ title, dataSource }) {
   const [data, setData] = useState([]);
   const [isCollapsed, setIsCollapsed] = useState(false);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(dataSource);
-      setData(response.data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(dataSource);
+        setData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
     fetchData();
-  }, [dataSource]);
+  }, [dataSource]); // 'dataSource' is the only external dependency required now
 
   const handleToggle = () => {
     setIsCollapsed((prevState) => !prevState);
@@ -39,7 +39,6 @@ function Section({ title, dataSource }) {
           ))}
         </div>
       ) : (
-        /* Carousel / Collapsed state rendering can be integrated here later */
         <div className={styles.gridContainer}>
           {data.slice(0, 7).map((item) => (
             <Card key={item.id} data={item} type="album" />
