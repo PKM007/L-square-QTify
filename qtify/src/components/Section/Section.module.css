@@ -1,0 +1,33 @@
+.section {
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-white, #ffffff);
+  margin: 0;
+}
+
+.toggleText {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-primary, #34c94b);
+  cursor: pointer;
+  margin: 0;
+}
+
+.gridContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 16px;
+}
